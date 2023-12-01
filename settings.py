@@ -1,5 +1,7 @@
 import psycopg2
 
+DB_CONNECTION_STRING = "dbname=Facturas user=postgres password=15963554 host=localhost port=5432"
+
 try:
     conexion = psycopg2.connect(
         database="Facturas",

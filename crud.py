@@ -1,21 +1,27 @@
 import psycopg2
 from psycopg2 import sql
 from psycopg2.extras import RealDictCursor
-import settings
+from settings import DB_CONNECTION_STRING
 
 # Conexión a la base de datos
 def conectar():
-    return psycopg2.connect(Facturas)
+    return psycopg2.connect(DB_CONNECTION_STRING)
 
 # Operaciones CRUD para la tabla Empresa
 def crear_empresa(razon_social, ruc, direccion_matriz, direccion_sucursal):
     conn = conectar()
     cursor = conn.cursor()
-    cursor.execute("INSERT INTO Empresa (razon_social, ruc, direccion_matriz, direccion_sucursal) VALUES (%s, %s, %s, %s) RETURNING id_empresa",
-                   (razon_social, ruc, direccion_matriz, direccion_sucursal))
-    id_empresa = cursor.fetchone()[0]
+    sql = "INSERT INTO Empresa (id_empresa, razon_social, ruc, direccion_matriz, direccion_sucursal) VALUES (%s, %s, %s, %s)"
+    id_empresa = int(input("Ingrese el id de su empresa: "))
+    razon_social = input("Ingrese razon social: ")
+    ruc = input("Ingrese su ruc")
+    direccion_matriz = input("Ingrese su direccion matriz: ")
+    direccion_sucursal = input("Ingrese su direccion sucursal: ")
+    datos = (razon_social, ruc, direccion_matriz, direccion_sucursal)
+    cursor.execute(sql,datos)
     conn.commit()
     conn.close()
+    registros = cursor.rowcount
     return id_empresa
 
 def obtener_empresas():
@@ -177,7 +183,7 @@ def eliminar_factura_adquirente(id_factura_adquirente):
 
 if __name__ == "__main__":
     # Ejemplo de cómo crear una empresa
-    id_empresa = crear_empresa("Empresa XYZ", "123456789", "Dirección Matriz", "Dirección Sucursal")
+    id_empresa = crear_empresa("1,Empresa XYZ", "123456789", "Dirección Matriz", "Dirección Sucursal")
     print(f"Se creó la empresa con ID: {id_empresa}")
 
     # Ejemplo de cómo obtener todas las empresas
