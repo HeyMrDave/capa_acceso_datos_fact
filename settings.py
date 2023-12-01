@@ -1,28 +1,15 @@
 import psycopg2
-from psycopg2 import DatabaseError
 
 try:
-    connection = psycopg2.connect(
-        host='localhost',
-        user='postgres',
-        #password='2607', # Styven
-        password='1234', # Franklin
-        #password='15963554', # David
-        #password='awayouname11', # Sebas
-        database='Facturas'
+    conexion = psycopg2.connect(
+        database="Facturas",
+        user="postgres",
+        password="2607",
+        host="localhost",
+        port="5432"
     )
+    cursor = conexion.cursor()
+    print("Conexión exitosa")
 
-    print("Conexión exitosa.")
-    cursor = connection.cursor()
-    cursor.execute("SELECT version()")
-    row = cursor.fetchone()
-    print("Versión del servidor de PostgreSQL: {}".format(row))
-    cursor.execute("SELECT * FROM empresa")
-    rows = cursor.fetchall()
-    for row in rows:
-        print(row)
-except DatabaseError as ex:
-    print("Error durante la conexión: {}".format(ex))
-finally:
-    connection.close()  # Se cerró la conexión a la BD.
-    print("La conexión ha finalizado.")
+except (Exception, psycopg2.Error) as error:
+    print("Error al conectar con la base de datos: ", error)
