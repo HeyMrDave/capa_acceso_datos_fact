@@ -4,7 +4,7 @@ try:
     conexion = psycopg2.connect(
         database="Facturas",
         user="postgres",
-        password="2607",
+        password="15963554",
         host="localhost",
         port="5432"
     )
