@@ -175,6 +175,22 @@ def eliminar_factura_adquirente(id_factura_adquirente):
     conn.commit()
     conn.close()
 
-if _name_ == "_main_":
-    # Aquí puedes probar las funciones según tus necesidades.
-    pass
+if __name__ == "__main__":
+    # Ejemplo de cómo crear una empresa
+    id_empresa = crear_empresa("Empresa XYZ", "123456789", "Dirección Matriz", "Dirección Sucursal")
+    print(f"Se creó la empresa con ID: {id_empresa}")
+
+    # Ejemplo de cómo obtener todas las empresas
+    empresas = obtener_empresas()
+    print("Lista de empresas:")
+    print(empresas)
+
+    # Ejemplo de cómo actualizar la información de una empresa
+    actualizar_empresa(id_empresa, "Nueva Razón Social", "987654321", "Nueva Dirección Matriz", "Nueva Dirección Sucursal")
+    print("Se actualizó la información de la empresa.")
+
+    # Ejemplo de cómo eliminar una empresa
+    eliminar_empresa(id_empresa)
+    print("Se eliminó la empresa.")
+
+    # Puedes repetir un proceso similar para probar las funciones relacionadas con Facturas, Forma_Pago, Pago, y Factura_Adquirente.
