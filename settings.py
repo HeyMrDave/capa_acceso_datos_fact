@@ -5,7 +5,10 @@ try:
     connection = psycopg2.connect(
         host='localhost',
         user='postgres',
-        password='2607',
+        #password='2607', # Styven
+        password='1234', # Franklin
+        #password='15963554', # David
+        #password='awayouname11', # Sebas
         database='Facturas'
     )
 
